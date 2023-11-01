@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32602.291
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetShopeBusiness", "NetShopeBusiness\NetShopeBusiness.csproj", "{ED508D41-3E52-4E0A-9BD4-29580E016535}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetShopeWeb", "NetShopeWeb\NetShopeWeb.csproj", "{C181CB39-0DBE-4E85-836B-BFB132DD792C}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED508D41-3E52-4E0A-9BD4-29580E016535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED508D41-3E52-4E0A-9BD4-29580E016535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED508D41-3E52-4E0A-9BD4-29580E016535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED508D41-3E52-4E0A-9BD4-29580E016535}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C181CB39-0DBE-4E85-836B-BFB132DD792C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C181CB39-0DBE-4E85-836B-BFB132DD792C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C181CB39-0DBE-4E85-836B-BFB132DD792C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C181CB39-0DBE-4E85-836B-BFB132DD792C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
