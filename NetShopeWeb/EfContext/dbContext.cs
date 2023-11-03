@@ -1,5 +1,5 @@
-﻿using NetShopeBusiness;
-using NetShopeBusiness.Model;
+﻿using NetShopeBusiness.Model;
+using NetShopeBusiness.Model.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

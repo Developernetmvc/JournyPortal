@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace NetShopeBusiness
+namespace NetShopeBusiness.Model
 {
     public partial class admin_Login
     {
