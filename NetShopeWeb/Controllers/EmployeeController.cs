@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using NetShopeBusiness;
+using NetShopeBusiness.Model;
 using NetShopeWeb.EfContext;
 using NetShopeWeb.ViewModel;
 

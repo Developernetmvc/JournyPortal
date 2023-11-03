@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetShopeBusiness.Model
+namespace NetShopeBusiness.Model.Model
 {
     public class ProductPicture
     {
