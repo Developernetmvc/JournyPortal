@@ -30,7 +30,7 @@ namespace NetShopeWeb.ViewModel
         public string ShortDescription { get; set; }
         [Display(Name = "Picture")]
         public string PicturePath { get; set; }
-        public HttpPostedFileBase Picture { get; set; }
+        public List<HttpPostedFileBase> Picture { get; set; }
         public string Note { get; set; }
     }
 }

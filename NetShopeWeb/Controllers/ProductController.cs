@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NetShopeBusiness.Model;
+using NetShopeBusiness.Model.Model;
 using NetShopeWeb.EfContext;
 using NetShopeWeb.ViewModel;
 
@@ -33,13 +34,10 @@ namespace MyEcommerceAdmin.Controllers
         [HttpPost]
         public ActionResult Create(ProductVM pvm)
         {
-
             if (ModelState.IsValid)
             {
                 if (pvm.Picture != null)
                 {
-                    string filePath = Path.Combine("~/Images", Guid.NewGuid().ToString() + Path.GetExtension(pvm.Picture.FileName));
-                    pvm.Picture.SaveAs(Server.MapPath(filePath));
 
                     Product p = new Product
                     {
@@ -57,6 +55,7 @@ namespace MyEcommerceAdmin.Controllers
                         Note = pvm.Note,
                         //PicturePath = filePath
                     };
+                    SavePicture(pvm);
                     db.Products.Add(p);
                     db.SaveChanges();
                     return PartialView("_Success");
@@ -67,7 +66,34 @@ namespace MyEcommerceAdmin.Controllers
             ViewBag.SubCategoryList = new SelectList(db.Suppliers, "SubCategoryID", "Name");
             return PartialView("_Error");
         }
+        private string SavePicture(ProductVM pvm)
+        {
+            if (pvm.Picture != null)
+            {
+                foreach (var file in pvm.Picture)
+                {
+                    if (file != null)
+                    {
+                        //string directoryPath = Server.MapPath("~/Images");
+                        //if (!Directory.Exists(directoryPath))
+                        //{
+                        //    Directory.CreateDirectory(directoryPath);
+                        //}
 
+                        string filePath = Path.Combine("~/Images", Guid.NewGuid().ToString() + Path.GetExtension(file.FileName));
+                        file.SaveAs(Server.MapPath(filePath));
+
+                        ProductPicture picture = new ProductPicture
+                        {
+                            PicturePath = filePath,
+                            ProductID = pvm.ProductID,
+                        };
+                        db.ProductPictures.Add(picture);
+                    }
+                }
+            }
+            return null;
+        }
 
 
 
@@ -111,8 +137,8 @@ namespace MyEcommerceAdmin.Controllers
                 string filePath = pvm.PicturePath;
                 if (pvm.Picture != null)
                 {
-                    filePath = Path.Combine("~/Images", Guid.NewGuid().ToString() + Path.GetExtension(pvm.Picture.FileName));
-                    pvm.Picture.SaveAs(Server.MapPath(filePath));
+                    //filePath = Path.Combine("~/Images", Guid.NewGuid().ToString() + Path.GetExtension(pvm.Picture.FileName));
+                    //pvm.Picture.SaveAs(Server.MapPath(filePath));
 
                     Product p = new Product
                     {
@@ -202,8 +228,8 @@ namespace MyEcommerceAdmin.Controllers
                 string filePath = pvm.PicturePath;
                 if (pvm.Picture != null)
                 {
-                    filePath = Path.Combine("~/Images", Guid.NewGuid().ToString() + Path.GetExtension(pvm.Picture.FileName));
-                    pvm.Picture.SaveAs(Server.MapPath(filePath));
+                    //    filePath = Path.Combine("~/Images", Guid.NewGuid().ToString() + Path.GetExtension(pvm.Picture.FileName));
+                    //    pvm.Picture.SaveAs(Server.MapPath(filePath));
 
                     Product p = new Product
                     {

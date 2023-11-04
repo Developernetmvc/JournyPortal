@@ -20,11 +20,23 @@
                                 <div class="aa-product-view-slider">
                                     <div id="demo-1" class="simpleLens-gallery-container">
                                         <div class="simpleLens-container">
-                                            <div class="simpleLens-big-image-container"><a data-lens-image="@Url.Content(Model.PicturePath)" class="simpleLens-lens-image"><img src="@Url.Content(Model.PicturePath)" class="simpleLens-big-image"></a></div>
+                                            @if (Model.Pictures != null && Model.Pictures.Any())
+                                            {
+                                                <div class="simpleLens-big-image-container">
+                                                    @foreach (var item in Model.Pictures.ToList())
+                                                    {
+                                                        <a data-lens-image="@Url.Content(item.PicturePath)" class="simpleLens-lens-image">
+                                                            <img src="@Url.Content(item.PicturePath)" class="simpleLens-big-image">
+                                                        </a>
+                                                    }
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
                             <!-- Modal view content -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
                                 <div class="aa-product-view-content">
@@ -163,7 +175,7 @@
                         <ul class="aa-product-catg aa-related-item-slider">
                             <!-- start single product item -->
                             <!-- start single product item -->
-                            @foreach (var item in (List<MyEcommerceAdmin.Models.Product>)@ViewBag.RelatedProducts)
+                            @foreach (var item in (List<NetShopeBusiness.Model.Product>)@ViewBag.RelatedProducts)
                             {
                                 { Html.RenderPartial("_Product", item); }
                             }
@@ -176,4 +188,4 @@
         </div>
     </div>
 </section>
-<!-- / product category -->
+

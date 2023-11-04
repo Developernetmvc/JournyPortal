@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -101,7 +102,10 @@ namespace MyEcommerceAdmin.Controllers
             var reviews = db.Reviews.Where(x => x.ProductID == id).ToList();
             ViewBag.Reviews = reviews;
             ViewBag.TotalReviews = reviews.Count();
-            ViewBag.RelatedProducts = db.Products.Where(y => y.CategoryID == prod.CategoryID).ToList();
+            ViewBag.RelatedProducts = db.Products
+                        .Where(y => y.CategoryID == prod.CategoryID)
+                        .Include(p => p.Pictures)
+                        .ToList();
             AddRecentViewProduct(id);
 
             var ratedProd = db.Reviews.Where(x => x.ProductID == id).ToList();
