@@ -10,7 +10,7 @@ namespace NetShopeWeb.EfContext
 {
     public class dbContext:DbContext
     {
-        public dbContext():base("SqlServerContext")
+        public dbContext():base("Feed")
         {
 
         }
