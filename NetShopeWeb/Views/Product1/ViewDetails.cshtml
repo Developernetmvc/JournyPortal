@@ -1,12 +1,14 @@
 ﻿@model  NetShopeBusiness.Model.Product
-
+@using Newtonsoft.Json
+@using NetShopeWeb.ViewModel
 @{
     ViewBag.Title = "View Details";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
- }
 <link href="~/Content/MyContent/css/style.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
 <!-- product category -->
 <section id="aa-product-details">
     <div class="container">
@@ -17,26 +19,17 @@
                         <div class="row">
                             <!-- Modal view slider -->
                             <div class="col-md-5 col-sm-5 col-xs-12">
-                                <div class="aa-product-view-slider">
-                                    <div id="demo-1" class="simpleLens-gallery-container">
-                                        <div class="simpleLens-container">
-                                            @if (Model.Pictures != null && Model.Pictures.Any())
-                                            {
-                                                <div class="simpleLens-big-image-container">
-                                                    @foreach (var item in Model.Pictures.ToList())
-                                                    {
-                                                        <a data-lens-image="@Url.Content(item.PicturePath)" class="simpleLens-lens-image">
-                                                            <img src="@Url.Content(item.PicturePath)" class="simpleLens-big-image">
-                                                        </a>
-                                                    }
-                                                </div>
-                                            }
+                                <div id="aa-product-details">
+                                    <div class="simpleLens-container">
+                                        <div class="simpleLens-big-image-container">
+                                            <a :data-lens-image="model.Pictures[0].PicturePath" class="simpleLens-lens-image">
+                                                <img :src="getImagePath(model.Pictures[currentIndex].PicturePath)" class="simpleLens-big-image" alt="Product Image">
+                                            </a>
+                                            <button @@click="nextImage" class="btn btn-primary mt-2">Next Image</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
                             <!-- Modal view content -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
                                 <div class="aa-product-view-content">
@@ -79,7 +72,7 @@
                                             <a class="aa-add-to-cart-btn" href="@(Session["username"] != null ? Url.Action("AddToCart", "Product1", new { id=Model.ProductID}) : Url.Action("Login", "Account"))">Add To Cart</a> }
                                         else
                                         {
-                                            <a class="aa-add-to-cart-btn" ))">Add To Cart</a>}
+                                            <a class="aa-add-to-cart-btn">Add To Cart</a>}
                                         <a class="aa-add-to-cart-btn" href="@(Session["username"] != null ? Url.Action("WishList", "Product1", new { id = Model.ProductID }) : Url.Action("Login", "Account"))">Wishlist</a>
                                     </div>
                                 </div>
@@ -96,7 +89,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="description">
                                 <p>@Model.ShortDescription</p>
-                               
+
                             </div>
                             <div class="tab-pane fade " id="review">
                                 <div class="aa-product-review-area">
@@ -188,4 +181,30 @@
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function() {
+        var model = @Html.JsonOf(Model);
+        var vapp = new Vue({
+            el: '#aa-product-details',
+            data: {
+                model: model,
+                currentIndex: 0
+            },
+            mounted: function () {
+                console.log('Pictures.PicturePath:', this.model.Pictures)
+            },
+            methods: {
+                getImagePath: function (path) {
+                    // Assuming path is relative to the Images folder
+                    return `/Images/${path}`;
+                },
+                nextImage: function () {
+                    this.currentIndex = (this.currentIndex + 1) % this.model.Pictures.length;
+                }
+            },
+
+        });
+
+    })
+</script>
 

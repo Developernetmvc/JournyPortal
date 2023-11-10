@@ -109,7 +109,7 @@
                                             <ul>
                                                 @foreach (var picturePath in item.Pictures)
                                                 {
-                                                    <li><img alt="" src="@Url.Content(picturePath.PicturePath)"></li>
+                                                    <li><img alt="" src="@Url.Content("~/Images/" +picturePath.PicturePath)"></li>
                                                 }
                                             </ul>
                                         </a>

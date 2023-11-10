@@ -179,14 +179,16 @@ namespace MyEcommerceAdmin.Controllers
 
         //GET PRODUCTS BY CATEGORY
         public ActionResult GetProductsByCategory(string categoryName, int? page)
-        {
+            {
             ViewBag.Categories = db.Categories.Select(x => x.Name).ToList();
             ViewBag.SubCategories = db.SubCategories.Select(x => x.Name).ToList();
             //ViewBag.TopRatedProducts = TopSoldProducts();
 
             ViewBag.RecentViewsProducts = RecentViewProducts();
 
-            var prods = db.Products.Where(x => x.SubCategory.Name == categoryName).ToList();
+            var prods = db.Products.Where(x => x.SubCategory.Name == categoryName)
+                       .Include(x=>x.Pictures)
+                       .ToList();
             return View("Products", prods.ToPagedList(page ?? 1, 9));
             
         }

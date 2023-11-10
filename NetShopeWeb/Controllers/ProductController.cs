@@ -66,34 +66,38 @@ namespace MyEcommerceAdmin.Controllers
             ViewBag.SubCategoryList = new SelectList(db.Suppliers, "SubCategoryID", "Name");
             return PartialView("_Error");
         }
-        private string SavePicture(ProductVM pvm)
+        private void SavePicture(ProductVM pvm)
         {
             if (pvm.Picture != null)
             {
                 foreach (var file in pvm.Picture)
                 {
-                    if (file != null)
+                    if (file != null && file.ContentLength > 0) // Check if the file has content
                     {
-                        //string directoryPath = Server.MapPath("~/Images");
-                        //if (!Directory.Exists(directoryPath))
-                        //{
-                        //    Directory.CreateDirectory(directoryPath);
-                        //}
+                        string directoryPath = Server.MapPath("~/Images");
 
-                        string filePath = Path.Combine("~/Images", Guid.NewGuid().ToString() + Path.GetExtension(file.FileName));
-                        file.SaveAs(Server.MapPath(filePath));
+                        if (!Directory.Exists(directoryPath))
+                        {
+                            Directory.CreateDirectory(directoryPath);
+                        }
+
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        string filePath = Path.Combine(directoryPath, fileName);
+                        file.SaveAs(filePath);
 
                         ProductPicture picture = new ProductPicture
                         {
-                            PicturePath = filePath,
+                            PicturePath = fileName, // Save only the file name in the database, not the full path
                             ProductID = pvm.ProductID,
                         };
                         db.ProductPictures.Add(picture);
                     }
                 }
+
+                //db.SaveChanges(); // Save changes to the database after adding pictures
             }
-            return null;
         }
+
 
 
 
