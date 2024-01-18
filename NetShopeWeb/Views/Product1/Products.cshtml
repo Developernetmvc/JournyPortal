@@ -5,7 +5,7 @@
 @{
     ViewBag.Title = "Products";
     Layout = "~/Views/Shared/_Layout1.cshtml";
- }
+}
 
 
 <style>
@@ -28,20 +28,20 @@
 <!-- catg header banner section -->
 @if (!string.IsNullOrEmpty(Request.QueryString["categoryName"]))
 {
-<section id="aa-catg-head-banner">
-    <img src="~/Content/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
-    <div class="aa-catg-head-banner-area">
-        <div class="container">
-            <div class="aa-catg-head-banner-content">
-                <h2>@(Request.QueryString["categoryName"])</h2>
-                <ol class="breadcrumb">
-                    <li><a href="@Url.Action("Index","Home")">Home</a></li>
-                    <li class="active">@(Request.QueryString["categoryName"])</li>
-                </ol>
+    <section id="aa-catg-head-banner">
+        <img src="~/Content/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+        <div class="aa-catg-head-banner-area">
+            <div class="container">
+                <div class="aa-catg-head-banner-content">
+                    <h2>@(Request.QueryString["categoryName"])</h2>
+                    <ol class="breadcrumb">
+                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li class="active">@(Request.QueryString["categoryName"])</li>
+                    </ol>
+                </div>
             </div>
         </div>
-    </div>
-</section>}
+    </section>}
 <!-- / catg header banner section -->
 <!-- product category -->
 <section id="aa-product-category">
@@ -54,7 +54,7 @@
                             @using (Html.BeginForm("Products", "Product1", FormMethod.Post, new { @id = "ssForm", categoryName = Request.QueryString["categoryName"] }))
                             {
 
-                <label for="">Sort by</label>
+                                <label for="">Sort by</label>
                                 <select name="sortBy">
                                     <option value="Default" selected> Default</option>
                                     <option value="Name"> Name</option>
@@ -62,12 +62,12 @@
                                     <option value="Date">Date</option>
                                 </select>
 
-                                                <label for="">Show</label>
-                                                                <select name="showNoProducts" onchange="">
-                                                                    <option value="6" selected>6</option>
-                                                                    <option value="9">9</option>
-                                                                    <option value="12">12</option>
-                                                                </select>}
+                                <label for="">Show</label>
+                                <select name="showNoProducts" onchange="">
+                                    <option value="6" selected>6</option>
+                                    <option value="9">9</option>
+                                    <option value="12">12</option>
+                                </select>}
                         </div>
                         <div class="aa-product-catg-head-right">
                             <a id="grid-catg" href="#"><span class="fa fa-th"></span></a>
@@ -80,13 +80,15 @@
                             {
                                 foreach (var item in Model)
                                 {
+
                                     { Html.RenderPartial("_Product", item); }
                                 }
                             }
                             else
                             {
 
-                <h3>Sorry! There is no Product available</h3>}
+                                <h3>Sorry! There is no Product available</h3>
+}
                             <!-- end start single product item -->
 
                         </ul>
@@ -109,7 +111,10 @@
                                             <ul>
                                                 @foreach (var picturePath in item.Pictures)
                                                 {
-                                                    <li><img alt="" src="@Url.Content("~/Images/" +picturePath.PicturePath)"></li>
+                                                    if (picturePath == item.Pictures.First())
+                                                    {
+                                                    <li><img alt="" src="@Url.Content("~/Images/" + picturePath.PicturePath)"></li>
+                                                    }
                                                 }
                                             </ul>
                                         </a>
@@ -155,37 +160,37 @@
                     </div>
                     <!-- single sidebar -->
                     @*<div class="aa-sidebar-widget">
-            <h3>Tags</h3>
-            <div class="tag-cloud">
-                <a href="#">Fashion</a>
-                <a href="#">Ecommerce</a>
-                <a href="#">Shop</a>
-                <a href="#">Hand Bag</a>
-                <a href="#">Laptop</a>
-                <a href="#">Head Phone</a>
-                <a href="#">Pen Drive</a>
-            </div>
-        </div>*@
+                            <h3>Tags</h3>
+                            <div class="tag-cloud">
+                                <a href="#">Fashion</a>
+                                <a href="#">Ecommerce</a>
+                                <a href="#">Shop</a>
+                                <a href="#">Hand Bag</a>
+                                <a href="#">Laptop</a>
+                                <a href="#">Head Phone</a>
+                                <a href="#">Pen Drive</a>
+                            </div>
+                        </div>*@
 
 
                     <!-- single sidebar -->
                     @*<div class="aa-sidebar-widget">
-            <h3>Top Sold Products</h3>
-            <div class="aa-recently-views">
-                <ul>
-                    @foreach (NetShopeBusiness.Model.TopSoldProduct item in ViewBag.TopRatedProducts)
-                    {
+                            <h3>Top Sold Products</h3>
+                            <div class="aa-recently-views">
+                                <ul>
+                                    @foreach (NetShopeBusiness.Model.TopSoldProduct item in ViewBag.TopRatedProducts)
+                                    {
 
-        <li>
-            <a href="@Url.Action("ViewDetails", "Product1", new { id = item.product.ProductID })" class="aa-cartbox-img"><img alt="" src="@Url.Content(item.product.PicturePath)"></a>
-            <div class="aa-cartbox-info">
-                <h4> <b><a href="@Url.Action("ViewDetails", "Product", new { id = item.product.ProductID })">@item.product.Name</a></b></h4>
-                <p>Sold: @item.CountSold</p>
-            </div>
-        </li>}
-                </ul>
-            </div>
-        </div>*@
+                        <li>
+                            <a href="@Url.Action("ViewDetails", "Product1", new { id = item.product.ProductID })" class="aa-cartbox-img"><img alt="" src="@Url.Content(item.product.PicturePath)"></a>
+                            <div class="aa-cartbox-info">
+                                <h4> <b><a href="@Url.Action("ViewDetails", "Product", new { id = item.product.ProductID })">@item.product.Name</a></b></h4>
+                                <p>Sold: @item.CountSold</p>
+                            </div>
+                        </li>}
+                                </ul>
+                            </div>
+                        </div>*@
 
 
                 </aside>
@@ -196,7 +201,8 @@
 </section>
 <!-- / product category -->
 
-<script type="text/javascript">function updateMinInput(val) {
+<script type="text/javascript">
+    function updateMinInput(val) {
         document.getElementById('minValue').value = 00;
         document.getElementById('minValue').value = val * 10;
     }

@@ -98,12 +98,18 @@ namespace MyEcommerceAdmin.Controllers
         //VIEW DETAILS
         public ActionResult ViewDetails(int id)
         {
-            var prod = db.Products.Find(id);
+            //var prod = db.Products.Find(id);
+            var product = db.Products
+                        .Where(x => x.ProductID == id)
+                        .Include(x => x.Pictures)
+                        .FirstOrDefault();
+                        
+                                    
             var reviews = db.Reviews.Where(x => x.ProductID == id).ToList();
             ViewBag.Reviews = reviews;
             ViewBag.TotalReviews = reviews.Count();
             ViewBag.RelatedProducts = db.Products
-                        .Where(y => y.CategoryID == prod.CategoryID)
+                        .Where(y => y.CategoryID == product.CategoryID)
                         .Include(p => p.Pictures)
                         .ToList();
             AddRecentViewProduct(id);
@@ -114,7 +120,7 @@ namespace MyEcommerceAdmin.Controllers
             ViewBag.AvgRate = TotalRate > 0 ? TotalRate / count : 0;
 
             this.GetDefaultData();
-            return View(prod);
+            return View(product);
         }
 
         //WISHLIST
