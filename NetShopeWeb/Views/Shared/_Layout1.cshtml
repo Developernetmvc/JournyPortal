@@ -1,6 +1,10 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     <title>@ViewBag.Title - MVC E-commerce Project</title>
     <link href="~/Content/MyContent/css/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/MyContent/css/font-awesome.css" rel="stylesheet" />
@@ -57,7 +61,7 @@
     <header id="aa-header">
         <!-- start header top  -->
         <div class="aa-header-top">
-            <div class="container">
+            <div class="container bg-info">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="aa-header-top-area">
@@ -140,12 +144,12 @@
                                 </a>
 
                                 <div class="aa-cartbox-summary">
-                                    <ul>
-                                        @if (Session["username"] != null)
-                                        {
-                                            Html.RenderPartial("_CartBox");
-                                        }
-                                    </ul>
+                                    @*<ul>
+                                            @if (Session["username"] != null)
+                                            {
+                                                Html.RenderPartial("_CartBox");
+                                            }
+                                        </ul>*@
 
                                     <a class="aa-cartbox-checkout aa-primary-btn" href="@Url.Action("Index","CheckOut")">Checkout</a>
 
@@ -171,19 +175,19 @@
 
     <!-- menu -->
     <section id="menu">
-        <div class="container">
+        <div class="container-fluid">
             <div class="menu-area">
                 <!-- Navbar -->
-                <div class="navbar navbar-default bg-dark" role="navigation">
+                <div class="navbar navbar-default  " role="navigation">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <button type="button" class="navbar-toggle bg-dark" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-                    <div class="navbar-collapse collapse" style="background-color:forestgreen">
+                    <div class="navbar-collapse collapse" style="background-color:gray">
                         <!-- Left nav -->
                         <ul class="nav navbar-nav">
                             <li><a href="@Url.Action("Index","Home")">Home</a></li>
@@ -206,7 +210,7 @@
                                     if (count < 8)
                                     {
                                         <li>
-                                            <a href="">@nav.Key<span class="caret"></span></a>
+                                            <a href="/Images/43329700-6489-4c40-a2bd-1f48580ce918.jpeg">@nav.Key<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
 
                                                 @foreach (var subNav in nav.Value)
@@ -236,7 +240,7 @@
     <!-- footer -->
     <footer id="aa-footer">
         <!-- footer bottom -->
-        <div class="aa-footer-top bg-primary">
+        <div class="aa-footer-top bg-info">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -360,6 +364,9 @@
         });
     </script>
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>

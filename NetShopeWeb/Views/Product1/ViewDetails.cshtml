@@ -18,12 +18,12 @@
                     <div class="aa-product-details-content">
                         <div class="row">
                             <!-- Modal view slider -->
-                            <div class="col-md-5 col-sm-5 col-xs-12">
+                            <div class="2">
                                 <div id="aa-product-details">
-                                    <div class="simpleLens-container">
-                                        <div class="simpleLens-big-image-container">
-                                            <a :data-lens-image="model.Pictures[0].PicturePath" class="simpleLens-lens-image">
-                                                <img :src="getImagePath(model.Pictures[currentIndex].PicturePath)" class="simpleLens-big-image" alt="Product Image">
+                                    <div class="card-group">
+                                        <div class="card" style="width: 25rem;">
+                                            <a :data-lens-image="model.Pictures[0].PicturePath">
+                                                <img :src="getImagePath(model.Pictures[currentIndex].PicturePath)" class="card-img-top" alt="Product Image">
                                             </a>
                                             <button @@click="nextImage" class="btn btn-primary mt-2">Next Image</button>
                                         </div>

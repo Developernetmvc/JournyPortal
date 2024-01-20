@@ -127,24 +127,24 @@ namespace MyEcommerceAdmin.Controllers
 
                     Customer c = new Customer
                     {
-                        CustomerID = cvm.CustomerID,
-                        First_Name = cvm.First_Name,
-                        Last_Name = cvm.Last_Name,
+                        //CustomerID = cvm.CustomerID,
+                        //First_Name = cvm.First_Name,
+                        //Last_Name = cvm.Last_Name,
                         UserName = cvm.UserName,
                         Password = cvm.Password,
-                        Gender = cvm.Gender,
-                        DateofBirth = cvm.DateofBirth,
-                        Country = cvm.Country,
-                        City = cvm.City,
-                        PostalCode = cvm.PostalCode,
-                        Email = cvm.Email,
-                        Phone = cvm.Phone,
-                        Address = cvm.Address,
-                        PicturePath = filePath,
-                        status = cvm.status,
-                        LastLogin = cvm.LastLogin,
-                        Created = cvm.Created,
-                        Notes = cvm.Notes
+                        //Gender = cvm.Gender,
+                        //DateofBirth = cvm.DateofBirth,
+                        //Country = cvm.Country,
+                        //City = cvm.City,
+                        //PostalCode = cvm.PostalCode,
+                        //Email = cvm.Email,
+                        //Phone = cvm.Phone,
+                        //Address = cvm.Address,
+                        //PicturePath = filePath,
+                        //status = cvm.status,
+                        //LastLogin = cvm.LastLogin,
+                        //Created = cvm.Created,
+                        //Notes = cvm.Notes
                     };
                     db.Customers.Add(c);
                     db.SaveChanges();

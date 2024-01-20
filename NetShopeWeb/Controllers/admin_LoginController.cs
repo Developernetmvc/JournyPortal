@@ -25,12 +25,12 @@ namespace MyEcommerceAdmin.Controllers
                              where m.UserName == login.UserName && m.Password == login.Password
                              select m).Any();
 
-                if (model)
+                if (!model)
                 {
                     var loginInfo = db.admin_Login.Where(x => x.UserName == login.UserName && x.Password == login.Password).FirstOrDefault();
 
-                    Session["username"] = loginInfo.UserName;
-                    TemData.EmpID = loginInfo.EmpID;
+                    //Session["username"] = loginInfo.UserName;
+                    //TemData.EmpID = loginInfo.EmpID;
                     return RedirectToAction("Index", "Dashboard");
                 }
             }

@@ -1,39 +1,47 @@
-﻿@model  NetShopeBusiness.Model.Product
+﻿
+@using Newtonsoft.Json
+@using NetShopeWeb.ViewModel
+
 <div class="col-md-4 col-sm-6">
-    <div class="card">
-        <a href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    @foreach (var item in Model.Pictures)
-                    {
-                        <div class="carousel-item @(item == Model.Pictures.First() ? "active" : "")">
-                            <img src="@Url.Content("~/Images/" + item.PicturePath)" alt="Product Image" class="d-block w-100">
+    <div class="card-body">
+        <div class="card" style="width: 25rem;">
+            <div class="card-group" style="width: 25rem;">
+                <a href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel">
+                                @foreach (var item in Model.Pictures)
+                                {
+                                    if (item == Model.Pictures.First())
+                                    {
+                                        <div class="card-group">
+
+                                            <div class="card" style="width: 25rem; height: 28rem; overflow: hidden;">
+                                                <img class="card-img-top" src="@Url.Content("~/Images/" + item.PicturePath)" alt="Product Image">
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
                         </div>
-                    }
+                    </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-text">@Model.Name</h5>
+                    <p class="card-text">
+                        <span class="_30jeq3">₹ @Model.UnitPrice</span>
+                    </p>
+                    <a href="@(Session["username"] != null ? Url.Action("AddToCart", "Product1", new { id = Model.ProductID}) : Url.Action("Login", "Account"))" class="btn btn-primary">
+                        <span class="fa fa-shopping-cart"></span> Add To Cart
+                    </a>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </a>
-        <div class="card-body">
-            <h5 class="card-text">@Model.Name</h5>
-            <p class="card-text">
-                <span class="_30jeq3">₹ @Model.UnitPrice</span>
-            </p>
-            <a href="@(Session["username"] != null ? Url.Action("AddToCart", "Product1", new { id = Model.ProductID}) : Url.Action("Login", "Account"))" class="btn btn-primary">
-                <span class="fa fa-shopping-cart"></span> Add To Cart
-            </a>
-        </div>
-        <div class="card-footer">
-            <div class="aa-product-hvr-content">
-                <a href="@(Session["username"]!=null ? Url.Action("WishList","Product1", new {id=@Model.ProductID }) :Url.Action("Login","Account"))" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-                <a href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })" title="View Details" data-toggle="tooltip" data-placement="top"><span class="fa fa-info"></span></a>
+                <div class="card-footer">
+                    <div class="aa-product-hvr-content">
+                        <a href="@(Session["username"]!=null ? Url.Action("WishList","Product1", new {id=@Model.ProductID }) :Url.Action("Login","Account"))" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+                        <a href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })" title="View Details" data-toggle="tooltip" data-placement="top"><span class="fa fa-info"></span></a>
+                    </div>
+                </div>
+>>>>>>> Stashed changes
             </div>
         </div>
     </div>
