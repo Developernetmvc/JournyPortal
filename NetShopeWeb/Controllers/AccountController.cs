@@ -124,32 +124,32 @@ namespace MyEcommerceAdmin.Controllers
                 {
                     string filePath = Path.Combine("~/Images", Guid.NewGuid().ToString() + Path.GetExtension(cvm.Picture.FileName));
                     cvm.Picture.SaveAs(Server.MapPath(filePath));
-
-                    Customer c = new Customer
-                    {
-                        //CustomerID = cvm.CustomerID,
-                        //First_Name = cvm.First_Name,
-                        //Last_Name = cvm.Last_Name,
-                        UserName = cvm.UserName,
-                        Password = cvm.Password,
-                        //Gender = cvm.Gender,
-                        //DateofBirth = cvm.DateofBirth,
-                        //Country = cvm.Country,
-                        //City = cvm.City,
-                        //PostalCode = cvm.PostalCode,
-                        //Email = cvm.Email,
-                        //Phone = cvm.Phone,
-                        //Address = cvm.Address,
-                        //PicturePath = filePath,
-                        //status = cvm.status,
-                        //LastLogin = cvm.LastLogin,
-                        //Created = cvm.Created,
-                        //Notes = cvm.Notes
-                    };
-                    db.Customers.Add(c);
-                    db.SaveChanges();
-                    return RedirectToAction("Login", "Account");
                 }
+                Customer c = new Customer
+                {
+                    //CustomerID = cvm.CustomerID,
+                    //First_Name = cvm.First_Name,
+                    //Last_Name = cvm.Last_Name,
+                    UserName = cvm.UserName,
+                    Password = cvm.Password,
+                    //Gender = cvm.Gender,
+                    //DateofBirth = cvm.DateofBirth,
+                    //Country = cvm.Country,
+                    //City = cvm.City,
+                    //PostalCode = cvm.PostalCode,
+                    //Email = cvm.Email,
+                    //Phone = cvm.Phone,
+                    //Address = cvm.Address,
+                    //PicturePath = filePath,
+                    //status = cvm.status,
+                    //LastLogin = cvm.LastLogin,
+                    //Created = cvm.Created,
+                    //Notes = cvm.Notes
+                };
+                db.Customers.Add(c);
+                db.SaveChanges();
+                return RedirectToAction("Login", "Account");
+
             }
             return PartialView("_Error");
         }

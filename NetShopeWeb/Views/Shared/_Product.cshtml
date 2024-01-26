@@ -3,61 +3,44 @@
 @using NetShopeWeb.ViewModel
 <div class="col-md-4 col-sm-6">
     <div class="card-body">
-        <a href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel">
-                        @foreach (var item in Model.Pictures)
-                        {
-                            if (item == Model.Pictures.First())
-                            {
-                                <div class="carousel-item">
-                                    <img src="@Url.Content("~/Images/" + item.PicturePath)" alt="Product Image" class="d-block w-100">
-                                </div>
-                            }
-                        }
+        <div class="card" style="width: 25rem;">
+            <div class="card-group" style="width: 25rem;">
+                <a href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel">
+                                @foreach (var item in Model.Pictures)
+                                {
+                                    if (item == Model.Pictures.First())
+                                    {
+                                        <div class="card-group">
+
+                                            <div class="card" style="width: 25rem; height: 28rem; overflow: hidden;">
+                                                <img class="card-img-top" src="@Url.Content("~/Images/" + item.PicturePath)" alt="Product Image">
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="card-body">
+                    <h5 class="card-text">@Model.Name</h5>
+                    <p class="card-text">
+                        <span class="_30jeq3">₹ @Model.UnitPrice</span>
+                    </p>
+                    <a href="@(Session["username"] != null ? Url.Action("AddToCart", "Product1", new { id = Model.ProductID}) : Url.Action("Login", "Account"))" class="btn btn-primary">
+                        <span class="fa fa-shopping-cart"></span> Add To Cart
+                    </a>
+                </div>
+                <div class="card-footer">
+                    <div class="aa-product-hvr-content">
+                        <a href="@(Session["username"]!=null ? Url.Action("WishList","Product1", new {id=@Model.ProductID }) :Url.Action("Login","Account"))" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+                        <a href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })" title="View Details" data-toggle="tooltip" data-placement="top"><span class="fa fa-info"></span></a>
                     </div>
                 </div>
-
-            </div>
-        </a>
-        <div class="card-body">
-            <h5 class="card-text">@Model.Name</h5>
-            <p class="card-text">
-                <span class="_30jeq3">₹ @Model.UnitPrice</span>
-            </p>
-            <a href="@(Session["username"] != null ? Url.Action("AddToCart", "Product1", new { id = Model.ProductID}) : Url.Action("Login", "Account"))" class="btn btn-primary">
-                <span class="fa fa-shopping-cart"></span> Add To Cart
-            </a>
-        </div>
-        <div class="card-footer">
-            <div class="aa-product-hvr-content">
-                <a href="@(Session["username"]!=null ? Url.Action("WishList","Product1", new {id=@Model.ProductID }) :Url.Action("Login","Account"))" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
-                <a href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })" title="View Details" data-toggle="tooltip" data-placement="top"><span class="fa fa-info"></span></a>
             </div>
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function() {
-        var model = @Html.JsonOf(Model);
-        var vapp = new Vue({
-            data: {
-                model: model,
-                currentIndex: 0
-            },
-            mounted: function () {
-                console.log('Pictures.PicturePath:', this.model.Pictures)
-            },
-            methods: {
-                getImagePath: function (path) {
-                    // Assuming path is relative to the Images folder
-                    return `/Images/${path}`;
-                },
-                nextImage: function () {
-                    this.currentIndex = (this.currentIndex + 1) % this.model.Pictures.length;
-                }
-            },
-        });
-    })
-</script>
