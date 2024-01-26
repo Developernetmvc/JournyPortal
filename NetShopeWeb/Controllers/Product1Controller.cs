@@ -7,7 +7,6 @@ using System.Web.Mvc;
 using NetShopeBusiness.Model;
 using NetShopeWeb.EfContext;
 using PagedList;
-//using PagedList.Mvc;
 
 namespace MyEcommerceAdmin.Controllers
 {
@@ -19,7 +18,7 @@ namespace MyEcommerceAdmin.Controllers
         public ActionResult Index()
         {
             ViewBag.Categories = db.Categories.Select(x => x.Name).ToList();
-           
+
             //ViewBag.TopRatedProducts = TopSoldProducts();
             ViewBag.RecentViewsProducts = RecentViewProducts();
 
@@ -153,7 +152,6 @@ namespace MyEcommerceAdmin.Controllers
         //ADD REVIEWS ABOUT PRODUCT
         public ActionResult AddReview(int productID, FormCollection getReview)
         {
-
             Review r = new Review();
             r.CustomerID = TempShpData.UserID;
             r.ProductID = productID;
@@ -166,7 +164,6 @@ namespace MyEcommerceAdmin.Controllers
             db.Reviews.Add(r);
             db.SaveChanges();
             return RedirectToAction("ViewDetails/" + productID + "");
-
         }
 
 
@@ -179,21 +176,23 @@ namespace MyEcommerceAdmin.Controllers
 
         //GET PRODUCTS BY CATEGORY
         public ActionResult GetProductsByCategory(string categoryName, int? page)
-            {
+        {
             ViewBag.Categories = db.Categories.Select(x => x.Name).ToList();
             ViewBag.SubCategories = db.SubCategories.Select(x => x.Name).ToList();
             //ViewBag.TopRatedProducts = TopSoldProducts();
-
+            int pageSize =9;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             ViewBag.RecentViewsProducts = RecentViewProducts();
 
             var prods = db.Products.Where(x => x.SubCategory.Name == categoryName)
-                       .Include(x=>x.Pictures)
-                       .ToList();
-            return View("Products", prods.ToPagedList(page ?? 1, 9));
-            
+                       .Include(x => x.Pictures).OrderByDescending(x => x.SubCategory.Name).ToPagedList(pageIndex, pageSize);
+
+            ViewBag.categoryName = categoryName;
+            return View("Products", prods);
         }
 
-        
+
 
         //SEARCH BAR RESULT
         public ActionResult Search(string product, int? page)

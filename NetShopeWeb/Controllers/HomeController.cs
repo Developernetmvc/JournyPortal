@@ -15,7 +15,7 @@ namespace MyEcommerceAdmin.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewBag.MenProduct = db.Products.Where(x => x.Category.Name.Equals("Men's Fashion")).ToList();
+            ViewBag.MenProduct = db.Products.Where(x => x.Category.Name.Equals("Diaper")).ToList();
             ViewBag.WomenProduct = db.Products.Where(x => x.Category.Name.Equals("Women's Fashion")).ToList();
             ViewBag.AccessoriesProduct = db.Products.Where(x => x.Category.Name.Equals("Electronic Accessories")).ToList();
             ViewBag.ElectronicsProduct = db.Products.Where(x => x.Category.Name.Equals("Electronic Devices")).ToList();

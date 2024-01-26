@@ -62,6 +62,9 @@
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -169,6 +172,7 @@
     <Compile Include="Controllers\ThankYouController.cs" />
     <Compile Include="Controllers\WishListController.cs" />
     <Compile Include="EfContext\dbContext.cs" />
+    <Compile Include="Enum\ProductType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -296,6 +300,7 @@
     <Content Include="Content\img\women\girl-6.png" />
     <Content Include="Content\img\women\girl-7.png" />
     <Content Include="Content\JS\app.js" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Content\JS\jquery-3.6.0.js" />
     <Content Include="Content\JS\jquery.unobtrusive-ajax.js" />
