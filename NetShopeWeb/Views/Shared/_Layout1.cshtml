@@ -16,12 +16,13 @@
     <link href="~/Content/MyContent/css/style.css" rel="stylesheet" />
     <style>
         #menu .menu-area .navbar-default .navbar-nav .open a {
-            background-color: #d31e1e;
+            background-color: black;
         }
 
         #aa-footer .aa-footer-top .aa-footer-top-area .aa-footer-widget .aa-footer-nav li a {
             color: #f8f8f8;
             font-size: 20px;
+            background-color: orangered;
         }
     </style>
 
@@ -46,7 +47,7 @@
     </script>
 
 </head>
-<body>
+<body class="bg-black">
     @*>>Webpage loader>>*@
 
     @*<div id="wpf-loader-two">
@@ -61,7 +62,7 @@
     <header id="aa-header">
         <!-- start header top  -->
         <div class="aa-header-top">
-            <div class="container bg-info">
+            <div class="container bg-dark container-fluid">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="aa-header-top-area">
@@ -71,46 +72,56 @@
                                 <!-- start currency -->
                                 <div class="aa-currency">
                                     <div class="dropdown">
+
                                         <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                             <i class="fa fa-money"></i>INR
+
+
+
                                         </a>
                                     </div>
                                 </div>
                                 <!-- start cellphone -->
                                 <div class="cellphone hidden-xs">
+
                                     <p><span class="fa fa-phone"></span>8411947042</p>
+
                                 </div>
                             </div>
                             <!-- header top Right -->
                             <div class="aa-header-top-right">
                                 <ul class="aa-head-top-nav-right">
 
-                                    <li><a href="@(Session["username"] != null ? Url.Action("Index", "Account") : Url.Action("Login", "Account"))">My Account</a></li>
+                                    <li><a href="@(Session["username"] != null ? Url.Action("Index", "Account") : Url.Action("Login", "Account"))"><small class="text-white">My Account</small></a></li>
 
                                     <li class="hidden-xs">
                                         <a href="@(Session["username"] != null ? Url.Action("Index", "WishList") : Url.Action("Login", "Account"))">
-                                            Wishlist @if (@ViewBag.WlItemsNo > 0)
+                                            <small class="text-white">
+                                                Wishlist
+                                            </small> @if (@ViewBag.WlItemsNo > 0)
                                             {<text>(@ViewBag.WlItemsNo)</text>}
                                         </a>
                                     </li>
 
                                     <li class="hidden-xs">
                                         <a href="@(Session["username"] != null ? Url.Action("Index", "MyCart") : Url.Action("Login", "Account"))">
-                                            My Cart @if (@ViewBag.NoOfItem > 0)
+                                            <small class="text-white">
+                                                My Cart
+                                            </small> @if (@ViewBag.NoOfItem > 0)
                                             {<text>(@ViewBag.NoOfItem)</text>}
                                         </a>
                                     </li>
 
-                                    <li class="hidden-xs"><a href="@(Session["username"] != null ? Url.Action("Index", "CheckOut") : Url.Action("Login", "Account"))">Checkout</a></li>
+                                    <li class="hidden-xs"><a href="@(Session["username"] != null ? Url.Action("Index", "CheckOut") : Url.Action("Login", "Account"))"><small class="text-white">Checkout</small></a></li>
 
                                     @if (Session["username"] == null)
                                     {
 
-                                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                                        <li><a href="@Url.Action("Login","Account")"><small class="text-primary ">Login</small></a></li>
                                     }
                                     else
                                     {
-                                        <li><a href="@Url.Action("Logout","Account")">Logout</a></li>
+                                        <li><a href="@Url.Action("Logout","Account")"><small class="text-danger ">Logout</small></a></li>
                                         <li><a href="">@Session["username"]</a></li>
                                     }
                                 </ul>
@@ -130,16 +141,18 @@
                             <div class="aa-logo">
                                 <!-- Text based logo -->
                                 <a href="@Url.Action("Index","Home")">
+
                                     <span class="fa fa-shopping-cart"></span>
                                     <p>NETSHOPNEXUS<strong></strong> <span>Trusted Online Shop</span></p>
+
                                 </a>
                             </div>
 
                             <!-- cart box -->
                             <div class="aa-cartbox">
                                 <a class="aa-cart-link" href="#">
-                                    <span class="fa fa-shopping-basket"></span>
-                                    <span class="aa-cart-title">SHOPPING CART</span>
+                                    <span class="fa fa-shopping-basket text-success"></span>
+                                    <span class="aa-cart-title text-success">SHOPPING CART</span>
                                     <span class="aa-cart-notify">@(ViewBag.NoOfItem==null ? 0 :ViewBag.NoOfItem)</span>
                                 </a>
 
@@ -187,7 +200,7 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-                    <div class="navbar-collapse collapse" style="background-color:gray">
+                    <div class="navbar-collapse collapse" style="background-color:black">
                         <!-- Left nav -->
                         <ul class="nav navbar-nav">
                             <li><a href="@Url.Action("Index","Home")">Home</a></li>
@@ -211,11 +224,11 @@
                                     {
                                         <li>
                                             <a href="/Images/43329700-6489-4c40-a2bd-1f48580ce918.jpeg">@nav.Key<span class="caret"></span></a>
-                                            <ul class="dropdown-menu">
+                                            <ul class="dropdown-menu bg-dark">
 
                                                 @foreach (var subNav in nav.Value)
                                                 {
-                                                    <li class="text-primary"><a href="@Url.Action("GetProductsByCategory","Product1", new { categoryName = subNav.Trim()})">@subNav.Trim()</a></li>
+                                                    <li class="text-primary"><a href="@Url.Action("GetProductsByCategory","Product1", new { categoryName = subNav.Trim()})"><small class="text-white">@subNav.Trim()</small></a></li>
                                                 }
                                             </ul>
                                         </li>
@@ -273,18 +286,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-6">
-                                    <div class="aa-footer-widget">
-                                        <div class="aa-footer-widget">
-                                            <h3>Useful Links</h3>
-                                            <ul class="aa-footer-nav">
-                                                <li><a href="#">Site Map</a></li>
-                                                <li><a href="#">Search</a></li>
-                                                <li><a href="#">Advanced Search</a></li>
-                                                <li><a href="#">Suppliers</a></li>
-                                                <li><a href="#">FAQ</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="col-md-3 col-sm-6">
                                     <div class="aa-footer-widget">
@@ -366,7 +368,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @*RenderSection("scripts", required: false)*@
 
 </body>
 </html>
