@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,7 +18,9 @@ namespace MyEcommerceAdmin.Controllers
         {
             this.GetDefaultData();
 
-            var wishlistProducts = db.Wishlists.Where(x => x.CustomerID == TempShpData.UserID).ToList();
+            var wishlistProducts = db.Wishlists.Where(x => x.CustomerID == TempShpData.UserID)
+                                   .Include(p => p.Product.Pictures)
+                                   .ToList();
             return View(wishlistProducts);
         }
 

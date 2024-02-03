@@ -108,7 +108,10 @@
                                             <ul>
                                                 @foreach (var picturePath in item.Pictures)
                                                 {
-                                                    <li><img alt="" src="@Url.Content("~/Images/" +picturePath.PicturePath)"></li>
+                                                    if (picturePath == item.Pictures.First())
+                                                    {
+                                                    <li><img alt="" src="@Url.Content("~/Images/" + picturePath.PicturePath)"></li>
+                                                    }
                                                 }
                                             </ul>
                                         </a>
@@ -142,7 +145,7 @@
                     </div>
 
                     <!-- single sidebar -->
-                    <div class="aa-sidebar-widget">
+                    @*<div class="aa-sidebar-widget">
                         <h3>Category</h3>
                         <ul class="aa-catg-nav">
                             @foreach (var item in ViewBag.SubCategories)
@@ -151,7 +154,7 @@
 
                             }
                         </ul>
-                    </div>
+                    </div>*@
                     <!-- single sidebar -->
                     @*<div class="aa-sidebar-widget">
                             <h3>Tags</h3>

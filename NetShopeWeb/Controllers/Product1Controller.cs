@@ -54,21 +54,31 @@ namespace MyEcommerceAdmin.Controllers
         //RECENT VIEWS PRODUCTS
         public IEnumerable<Product> RecentViewProducts()
         {
-            if (TempShpData.UserID > 0)
+            try
             {
-                var top3Products = (from recent in db.RecentlyViews
-                                    where recent.CustomerID == TempShpData.UserID
-                                    orderby recent.ViewDate descending
-                                    select recent.ProductID).ToList().Take(3);
+                if (TempShpData.UserID > 0)
+                {
+                    var top3Products = (from recent in db.RecentlyViews
+                                        where recent.CustomerID == TempShpData.UserID
+                                        orderby recent.ViewDate descending
+                                        select recent.ProductID).Take(3).ToList();
 
-                var recentViewProd = db.Products.Where(x => top3Products.Contains(x.ProductID));
-                return recentViewProd;
+                    var recentViewProd = db.Products
+                            .Where(x => top3Products.Contains(x.ProductID))
+                            .ToList();
+                    return recentViewProd;
+                }
+                else
+                {
+                    var prod = (from p in db.Products
+                                select p).OrderByDescending(x => x.UnitPrice).Take(3).ToList();
+                    return prod;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var prod = (from p in db.Products
-                            select p).OrderByDescending(x => x.UnitPrice).Take(3).ToList();
-                return prod;
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw;
             }
         }
 
@@ -91,7 +101,6 @@ namespace MyEcommerceAdmin.Controllers
             TempShpData.items.Add(OD);
             AddRecentViewProduct(id);
             return Redirect(TempData["returnURL"].ToString());
-
         }
 
         //VIEW DETAILS
@@ -180,14 +189,13 @@ namespace MyEcommerceAdmin.Controllers
             ViewBag.Categories = db.Categories.Select(x => x.Name).ToList();
             ViewBag.SubCategories = db.SubCategories.Select(x => x.Name).ToList();
             //ViewBag.TopRatedProducts = TopSoldProducts();
-            int pageSize =9;
+            int pageSize = 9;
             int pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             ViewBag.RecentViewsProducts = RecentViewProducts();
 
             var prods = db.Products.Where(x => x.SubCategory.Name == categoryName)
                        .Include(x => x.Pictures).OrderByDescending(x => x.SubCategory.Name).ToPagedList(pageIndex, pageSize);
-
             ViewBag.categoryName = categoryName;
             return View("Products", prods);
         }

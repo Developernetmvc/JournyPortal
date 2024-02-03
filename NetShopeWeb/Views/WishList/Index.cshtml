@@ -46,18 +46,33 @@
 
                                                 <tr>
                                                     <td><a class="remove" href="@Url.Action("Remove", "WishList", new { id=item.WishlistID})"><fa class="fa fa-close"></fa></a></td>
-                                                    <td><a href="#"><img src="@Url.Content(item.Product.PicturePath)" alt=""></a></td>
+                                                    @foreach (var picture in item.Product.Pictures)
+                                                    {
+                                                        if (picture == item.Product.Pictures.First())
+                                                        {
+                                                            <td>
+                                                                <a href="#">
+                                                                    <img src="@Url.Content("~/Images/" + picture.PicturePath)" alt="" />
+                                                   
+                                                                </a>
+                                                            </td>
+                                                        }
+                                                    }
                                                     <td><a class="aa-cart-title" href="#">@item.Product.Name</a></td>
                                                     <td>@item.Product.UnitPrice</td>
                                                     <td>
                                                         @if (item.Product.UnitInStock > 0)
                                                         {
-                                                            <text>In Stock (@item.Product.UnitInStock)</text> }
+                                                            <text>In Stock (@item.Product.UnitInStock)</text>
+                                                        }
                                                         else
-                                                        { <text>Out of Stock (@item.Product.UnitInStock)</text>}
+                                                        {
+                                                            <text>Out of Stock (@item.Product.UnitInStock)</text>
+                                                        }
                                                     </td>
                                                     <td><a href="@Url.Action("AddToCart", "WishList", new { id=item.WishlistID})" class="aa-add-to-cart-btn">Add To Cart</a></td>
                                                 </tr>
+
                                             }
                                         }
                                         else

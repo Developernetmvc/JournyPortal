@@ -6,6 +6,7 @@
         <div class="card" style="width: 25rem;">
             <div class="card-group" style="width: 25rem;">
                 <a href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })">
+                    @{ TempData["returnURL"] = Request.RawUrl; }
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel">

@@ -117,12 +117,12 @@
                                     @if (Session["username"] == null)
                                     {
 
-                                        <li><a href="@Url.Action("Login","Account")"><small class="text-primary ">Login</small></a></li>
+                                    <li><a href="@Url.Action("Login","Account")"><small class="text-primary ">Login</small></a></li>
                                     }
                                     else
                                     {
-                                        <li><a href="@Url.Action("Logout","Account")"><small class="text-danger ">Logout</small></a></li>
-                                        <li><a href="">@Session["username"]</a></li>
+                                    <li><a href="@Url.Action("Logout","Account")"><small class="text-danger ">Logout</small></a></li>
+                                    <li><a href="">@Session["username"]</a></li>
                                     }
                                 </ul>
                             </div>
@@ -222,16 +222,16 @@
                                 {
                                     if (count < 8)
                                     {
-                                        <li>
-                                            <a href="/Images/43329700-6489-4c40-a2bd-1f48580ce918.jpeg">@nav.Key<span class="caret"></span></a>
-                                            <ul class="dropdown-menu bg-dark">
+                                <li>
+                                    <a href="/Images/43329700-6489-4c40-a2bd-1f48580ce918.jpeg">@nav.Key<span class="caret"></span></a>
+                                    <ul class="dropdown-menu bg-dark">
 
-                                                @foreach (var subNav in nav.Value)
+                                        @foreach (var subNav in nav.Value)
                                                 {
-                                                    <li class="text-primary"><a href="@Url.Action("GetProductsByCategory","Product1", new { categoryName = subNav.Trim()})"><small class="text-white">@subNav.Trim()</small></a></li>
+                                        <li class="text-primary"><a href="@Url.Action("GetProductsByCategory","Product1", new { categoryName = subNav.Trim()})"><small class="text-white">@subNav.Trim()</small></a></li>
                                                 }
-                                            </ul>
-                                        </li>
+                                    </ul>
+                                </li>
                                         count++;
                                     }
                                 } }
@@ -293,9 +293,9 @@
                                         <div class="aa-footer-widget">
                                             <h3>Contact Information</h3>
                                             <address>
-                                                <p>IDB-Bhabon, Dhaka Bangladesh</p>
-                                                <p><span class="fa fa-phone"></span>019-7558-7588</p>
-                                                <p><span class="fa fa-envelope"></span>help@isdb-bisew.org</p>
+                                                <p>India ,Thane</p>
+                                                @*<p><span class="fa fa-phone"></span></p>*@
+                                                <p><span class="fa fa-envelope"></span>help@NETSHOPNEXUS.org</p>
                                             </address>
                                             <div class="aa-footer-social">
                                                 <a href="#"><span class="fa fa-facebook"></span></a>
@@ -317,9 +317,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="aa-footer-bottom-area">
-                            <p>&copy; @DateTime.Now.Year - <a href="https://www.isdb-bisew.org">IsDB-BISEW</a></p>
-                        </div>
+                        @*<div class="aa-footer-bottom-area">
+                            <p>&copy; @DateTime.Now.Year - <a href="https://www.isdb-bisew.org">NETSHOPNEXUS</a></p>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -369,7 +369,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @*RenderSection("scripts", required: false)*@
-
 </body>
 </html>
 
